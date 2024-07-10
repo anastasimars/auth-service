@@ -11,26 +11,26 @@ class RegistrationApiImpl implements RegistrationApi {
 
     @Override
     @Transactional
-    public void processRegistration(RegistrationDataRequest request) {
-        RegistrationDataEntity registrationDataEntity = mapDataToEntity(request);
-        registrationRepository.save(registrationDataEntity);
+    public void processRegistration(RegistrationRequest request) {
+        ActiveUserEntity activeUser = mapDataToEntity(request);
+        registrationRepository.save(activeUser);
     }
 
-    private RegistrationDataEntity mapDataToEntity(RegistrationDataRequest request) {
-        AddressEntity addressEntity = mapAllressToEntity(request.getAddress());
-        RegistrationDataEntity registrationDataEntity = new RegistrationDataEntity(null,
+    private ActiveUserEntity mapDataToEntity(RegistrationRequest request) {
+        AddressEntity addressEntity = mapAddressToEntity(request.getAddress());
+        ActiveUserEntity activeUser = new ActiveUserEntity(null,
                 request.getFirstName(),
                 request.getLastName(),
                 addressEntity,
                 request.getEmail(),
                 request.getPassword());
 
-        addressEntity.setRegistrationDataEntity(registrationDataEntity);
+        addressEntity.addActiveUser(activeUser);
 
-        return registrationDataEntity;
+        return activeUser;
     }
 
-    private AddressEntity mapAllressToEntity(Address address) {
+    private AddressEntity mapAddressToEntity(Address address) {
         return AddressEntity.builder()
                 .city(address.getCity())
                 .apartmentNumber(address.getApartmentNumber())

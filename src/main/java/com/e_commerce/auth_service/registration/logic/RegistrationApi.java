@@ -1,9 +1,8 @@
 package com.e_commerce.auth_service.registration.logic;
 
-import com.e_commerce.auth_service.registration.model.RegistrationDataRequest;
-import com.e_commerce.auth_service.registration.model.RegistrationResponse;
+import com.e_commerce.auth_service.registration.model.RegistrationRequest;
 
 public interface RegistrationApi {
 
-    void processRegistration(RegistrationDataRequest request);
+    void processRegistration(RegistrationRequest request);
 }

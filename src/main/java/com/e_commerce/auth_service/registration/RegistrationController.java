@@ -1,7 +1,7 @@
 package com.e_commerce.auth_service.registration;
 
 import com.e_commerce.auth_service.registration.logic.RegistrationApi;
-import com.e_commerce.auth_service.registration.model.RegistrationDataRequest;
+import com.e_commerce.auth_service.registration.model.RegistrationRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
     private final RegistrationApi registrationApi;
 
     @PostMapping("/register")
-    ResponseEntity<Void> registration(@Valid @RequestBody RegistrationDataRequest request) {
+    ResponseEntity<Void> registration(@Valid @RequestBody RegistrationRequest request) {
         registrationApi.processRegistration(request);
         return ResponseEntity.ok().build();
     }
