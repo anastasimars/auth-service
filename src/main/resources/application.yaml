@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: Authorization Service
+  profile:
+    active: dev
+
+springdoc:
+  default-produces-media-type: application/json # sets default media type for responses
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+  info:
+    title: Authorization Service
+    description: This is the API documentation for Auth-Service.
+    version: v1.0.0
+
+server:
+  servlet:
+    context-path: /api/v1/
+
+

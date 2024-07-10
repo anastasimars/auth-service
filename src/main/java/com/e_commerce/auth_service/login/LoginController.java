@@ -1,4 +1,4 @@
-package com.e_commerce.auth_service.logining;
+package com.e_commerce.auth_service.login;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
