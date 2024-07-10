@@ -1,10 +1,13 @@
 package com.e_commerce.auth_service.registration.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+
+import java.util.List;
 
 @Entity
-@Table(name = "address_entity")
+@Table(name = "addresses")
 @Builder
 @Getter
 public class AddressEntity {
@@ -12,7 +15,6 @@ public class AddressEntity {
     @Id
     @GeneratedValue
     private Long id;
-
     @Column(name = "city")
     private String city;
     @Column(name = "street")
@@ -23,9 +25,13 @@ public class AddressEntity {
     private String houseNumber;
     @Column(name = "apartment_number")
     private String apartmentNumber;
-    @Column(name = "registration_data")
-    @ManyToOne
-    @Setter
-    private RegistrationDataEntity registrationDataEntity;
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ActiveUserEntity> activeUsers;
 
+    public void addActiveUser(ActiveUserEntity user) {
+        if (!activeUsers.contains(user)) {
+            activeUsers.add(user);
+            user.setAddress(this);
+        }
+    }
 }

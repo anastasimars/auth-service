@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class RegistrationDataRequest {
+public class RegistrationRequest {
 
     @NotBlank(message = "First name is mandatory")
     @Size(min = 3, max = 20, message = "First name must be between 3 and 20 characters")

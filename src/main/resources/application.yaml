@@ -1,7 +1,7 @@
 spring:
   application:
     name: Authorization Service
-  profile:
+  profiles:
     active: dev
 
 springdoc:
