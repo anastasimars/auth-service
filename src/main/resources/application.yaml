@@ -1,11 +1,50 @@
 spring:
-  application:
-    name: Authorization Service
-  profiles:
-    active: dev
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/auth-service
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 1111
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: authapp
+            client-secret: Q1jWxCRIAVFwjdUnSlLy8n81IkjDaqmg
+            scope: openid
+            authorization-grant-type: authorization_code
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/springboot
+            user-name-attribute: preferred_username
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/springboot
+          jwt-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
 
 springdoc:
-  default-produces-media-type: application/json # sets default media type for responses
+  default-produces-media-type: application/json
   api-docs:
     path: /v3/api-docs
   swagger-ui:
@@ -18,5 +57,6 @@ springdoc:
 server:
   servlet:
     context-path: /api/v1/
+  port: 8081
 
 
